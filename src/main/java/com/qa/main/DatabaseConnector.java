@@ -19,6 +19,7 @@ public class DatabaseConnector {
     }
 
     public void createActor(String forename, String surname) throws SQLException {
+    	this.statement = connection.createStatement();
         statement.executeUpdate(String.format("INSERT INTO actor (`first_name`, `last_name`)" + " VALUES ('%s', '%s')",
                 forename, surname));
     }
@@ -29,16 +30,20 @@ public class DatabaseConnector {
         ResultSet results = this.statement.executeQuery(sql);
 
         while (results.next()) {
-            System.out.println(String.format("%s %s", results.getString("first_name"), results.getString("last_name")));
+            System.out.println(String.format("%s %s %s", results.getString("first_name"), results.getString("last_name"), results.getString("actor_id")));
         }
     }
 
-    public void updateActor() throws SQLException {
-
+    public void updateActor(String forename, String surname, int ID) throws SQLException {
+    	this.statement = connection.createStatement();
+    	String sql = "UPDATE actor SET first_name=" + "'"+ forename + "'" + ", last_name=" + "'"+ surname + "'" + " WHERE actor_id=" + ID +";";
+    	statement.executeUpdate(sql);
     }
 
-    public void deleteActor() throws SQLException {
-
+    public void deleteActor(int ID) throws SQLException {
+    	this.statement = connection.createStatement();
+    	String sql = "DELETE FROM actor where actor_id=" + "'"+ ID + "'";
+    	statement.executeUpdate(sql);
     }
 
 }
