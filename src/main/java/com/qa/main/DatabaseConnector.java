@@ -12,6 +12,7 @@ public class DatabaseConnector {
     private Connection connection;
 
     private Statement statement;
+  
 
     public DatabaseConnector() throws SQLException {
         connection = DriverManager.getConnection(DatabaseConfiguration.URL, DatabaseConfiguration.USER,
@@ -45,5 +46,10 @@ public class DatabaseConnector {
     	String sql = "DELETE FROM actor where actor_id=" + "'"+ ID + "'";
     	statement.executeUpdate(sql);
     }
+
+	public void close() throws SQLException{
+		
+			connection.close();	
+	}
 
 }
