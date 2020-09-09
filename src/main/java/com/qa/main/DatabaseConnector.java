@@ -30,7 +30,7 @@ public class DatabaseConnector {
         ResultSet results = this.statement.executeQuery(sql);
 
         while (results.next()) {
-            System.out.println(String.format("%s %s %s", results.getString("first_name"), results.getString("last_name"), results.getString("actor_id")));
+            System.out.println(String.format("Name: %s %s | ID: %s", results.getString("first_name"), results.getString("last_name"), results.getString("actor_id")));
         }
     }
 
